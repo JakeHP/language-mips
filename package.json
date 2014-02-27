@@ -1,6 +1,6 @@
 {
   "name": "language-mips",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "private": true,
   "description": "MIPS language support in Atom",
   "repository": "https://github.com/Jakehp/language-mips",
@@ -8,8 +8,7 @@
   "engines": {
     "atom": ">0.50.0"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "bugs": {
     "url": "https://github.com/Jakehp/language-mips/issues"
   }
