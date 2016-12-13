@@ -20,7 +20,7 @@
     'name': 'storage.type.mips'
   }
   {
-    'match': '\\.(align|extern||globl)\\b'
+    'match': '\\.(align|extern|globl)\\b'
     'name': 'storage.modifier.mips'
   }
   {
