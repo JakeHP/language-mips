@@ -1,0 +1,80 @@
+# Syntax highlighting for the armips toolchain
+# See https://github.com/Kingcom/armips for more information
+
+scopeName: 'source.armips-toolchain'
+name: 'MIPS Assembly (armips)'
+fileTypes: [
+  'asm'
+  's'
+  'mips'
+  'spim'
+]
+patterns: [
+    # the basic MIPS instruction set
+    {
+        include: 'source.mips'
+    }
+    # armips supports single-line style comments with ; and //,
+    # and block style comments
+    {
+        include: '#comments'
+    }
+    # armips directives
+    {
+        include: '#directives'
+    }
+]
+
+# start of repository
+repository:
+
+    # comments supported by armips
+    comments:
+        patterns: [
+            # semicolon comments
+            {
+                match:  '(;|(^|\\s)#\\s).*$'
+                name:   'comment.line.semicolon.armips-toolchain'
+            }
+            # double-slash comments
+            {
+                name: 'comment.line.double-slash.armips-toolchain'
+                begin: '//'
+                end: '$'
+            }
+            # /* */ block style comments
+            {
+                begin: '/\\*'
+                captures:
+                    0:
+                        name: 'punctuation.definition.comment.armips-toolchain'
+                end: '\\*/'
+                name: 'comment.block.armips-toolchain'
+            }
+        ] # end comments
+
+    # armips directives
+    directives:
+        patterns: [
+            # equ directive
+            {
+                match:  '(\\.)?\\b(?i)(equ|db|dw|stringn?|strn?|sjisn?|(else)?if(n?def)?|else|endif|word|byte|dcb|halfword|dh|dcw|dcd|doubleword|dd|dcq|float|double)\\b'
+                name:   'storage.type.armips-toolchain'
+            }
+            # data directives
+            {
+                match:  '(\\.)\\b(?i)(fixloaddelay|resetdelay|(load)?table|(end)?area|orga?|import(obj|lib)?|psx|ps2|psp|n64|rsp|gba|nds|3ds|arm.big|arm.little|headersize|(create|close)(file)?|include|fill|skip|incbin|definelabel|warning|error|notice|loadelf)\\b'
+                name:   'storage.modifier.armips-toolchain'
+            }
+            # pseudo functions
+            {
+                match:  '\\b(version|endianess|orga?|headersize|fileexists|filesize|tostring|tohex|round|int|float|frac|abs|hi|lo|strlen|substr|regex_match|regex_search|regex_extract|r?find|readbyte|read(u|s)(8|16|32|64)|readascii)\\b'
+                name:   'support.function.pseudo.armips-toolchain'
+            }
+            # Operators
+            {
+                match:  '!|&|&&|\\^|\\*|\\/|\\-|\\+|~|=|<=|>=|<<|>>|<>|<|>|\\||\\|\\|'
+                name:   'keyword.operator.armips-toolchain'
+            }
+
+        ]
